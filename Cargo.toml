@@ -1,0 +1,13 @@
+[package]
+name = "my-money"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = { version = "0.4.38", features = ["serde"] }
+diesel = { version = "2.2.0", features = ["postgres"] }
+serde = { version = "1.0.203", features = ["derive"] }
+
+[[bin]]
+name = "my-money"
+path = "src/main.rs"
