@@ -1,7 +1,12 @@
-use uuid::Uuid;
+use diesel::connection::SimpleConnection;
+
+mod db;
 
 fn main() {
-    let id = Uuid::new_v4();
+    let mut conn = db::establish_connection();
 
-    println!("UUID v4: {}", id);
+    match conn.batch_execute("SELECT 1") {
+        Ok(_) => println!("Ok"),
+        Err(_) => eprintln!("Error connecting database"),
+    }
 }
