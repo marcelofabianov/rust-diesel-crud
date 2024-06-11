@@ -1,12 +1,20 @@
-use diesel::connection::SimpleConnection;
-
 mod db;
+mod models;
+mod repo;
+mod schema; // Importe o módulo repo.rs
 
 fn main() {
-    let mut conn = db::establish_connection();
+    let connection = db::establish_connection();
 
-    match conn.batch_execute("SELECT 1") {
-        Ok(_) => println!("Ok"),
-        Err(_) => eprintln!("Error connecting database"),
+    repo::create_new_user(&connection);
+
+    let new_user = repo::create_new_user(&connection);
+    println!("User created: {:?}", new_user);
+
+    let all_users = repo::get_all_users(&connection);
+    println!("Users:");
+
+    for user in all_users {
+        println!("{:?}", user);
     }
 }
