@@ -19,6 +19,8 @@ pub fn create_new_user(connection: &mut PgConnection) -> User {
         .expect("Error saving new user")
 }
 
-pub fn get_all_users(connection: &PgConnection) -> Vec<User> {
-    users.load::<User>(connection).expect("Error get all users")
+pub fn get_all_users(connection: &mut PgConnection) -> Vec<User> {
+    use crate::schema::users::dsl::*;
+
+    users.load::<User>(connection).expect("Error loading users")
 }
