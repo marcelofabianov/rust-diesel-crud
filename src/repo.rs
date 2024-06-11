@@ -14,7 +14,7 @@ pub fn create_new_user(connection: &mut PgConnection) -> User {
 
     diesel::insert_into(users::table)
         .values(&new_user)
-        .returning(User::as_returning())
+        //.returning(User::as_returning())
         .get_result(connection)
         .expect("Error saving new user")
 }
